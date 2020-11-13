@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>performance</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <h1>性能优化</h1>
+  <p>垃圾收集器的调用会消耗性能。垃圾收集器是周期性运行的，如果为变量分配的内存数量很可观，那么回收工作量也是相当大的。</p>
+  <p>确保占用最少的内存可以让页面获得更好的性能，而优化内存占用的最佳方式，就是为执行中的代码只保存必要的数据。一旦数据不再有用，最好通过将其值设置为null来释放其引用----这个方法叫做<strong>解除引用</strong></p>
+  <script src="./performance.js"></script>
+</body>
+</html>

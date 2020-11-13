@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Object</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <p>在ECMAScript中，Object类型是所有它的实例的基础。换句话说，Object类型中所具有的任何属性和方法也同样存在于更具体的对象</p>
+  <p>Object的每个实例都具有下列属性和方法：</p>
+  <ol>
+    <li><strong>constructor: </strong>保存着用于创建当前对象的函数</li>
+    <li><strong>hasOwnProperty(propertyName): </strong>用于检查给定的属性在当前对象实例中（而不是在实例的原型中）是否存在。作为参数的属性名必须以字符串形式指定</li>
+    <li><strong>isPrototypeof(object): </strong>用于检查传入的对象是否是当前对象的原型</li>
+    <li><strong>propertyIsEnumerable(propertyName)：</strong>用于检查给定的属性是否能够使用for-in语句来枚举。参数必须是字符串</li>
+    <li><strong>toLocalString()：</strong>返回对象的字符串表示，该字符串与执行环境的地区对应</li>
+    <li><strong>toString()：</strong>返回对象的字符串表示</li>
+    <li><strong>valueOf()：</strong>返回对象的字符串、数值或布尔值表示。通常与toString()方法返回的值相同</li>
+  </ol>
+</body>
+</html>
