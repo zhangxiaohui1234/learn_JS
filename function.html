@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>function</title>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <p>function类型实际上也是一个对象。函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。因此，也就没有了函数重载</p>
+  <p>要访问函数的指针而不执行函数的话，必须去掉函数名后面的大括号</p>
+  <p>在函数内部，有两个特殊的对象：arguments和this</p>
+  <p>函数的参数可以同过arguments获取到，arguments对象与数组类似，但不是array的实例。传递的所有参数都可以通过数组下标的方式获取到</p>
+  <p id="p1"></p>
+  <p>虽然arguments的主要用途是保存函数参数，但这个对象还有一个名叫callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数，关于这个有一个非常经典的阶乘函数</p>
+  <p>递归一般都是函数调用自身，在函数有名字，且以后名字都不会变的情况下，定义没有问题。但问题是，递归就和函数名耦合在了一起。为了消除这种现象，可以是用arguments.callee</p>
+  <p>使用了callee之后，不管函数名改成了什么，都可以完成函数内部的递归。</p>
+  <p>另一个特殊变量this，this引用的是函数执行的环境对象。由于调用函数之前，this的指向并不确定。因此，有可能会在代码执行的过程中指向不同的对象。</p>
+  <p id="p2"></p>
+  <p>还有一个属性，caller，用于保存调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，caller值为null</p>
+  <p>每个函数都包含两个属性：length和prototype，length表示函数希望接收的参数的个数；对于SE的引用类型而言，prototype是保存它们所有实例方法的真正所在，</p>
+  <p>每个函数都包含两个方法：apply()和call()，这两个方法的用途都是在特定的作用域中调用函数，实际上等同于设置函数体this对象的值。都接收两个值，第一个是作用域，第二个是参数，区别在于apply的参数是数组，apply(this, []);而call的参数必须逐个列出，call(this, param1, param2, param3, ...)</p>
+  <script type="text/javascript">
+    const p1 = document.getElementById('p1')
+    function example(param1, param2) {
+      for (let i = 0; i < arguments.length; i++) {
+        p1.innerText += arguments[i] + ', '
+      }
+    }
+    example('first', 'second', 'third', 'fourth', 'fifth', 'sixth')
+
+    function factorial(num) {
+      if (num <= 1) {
+        return 1
+      } else {
+        return num * arguments.callee(num - 1)
+      }
+    }
+    console.log('factorial', factorial(5));
+
+    window.color = 'red'
+    var o = { color: 'blue' }
+
+    function sayColor() {
+      console.log('this', this);
+      document.getElementById('p2').innerText += 'sayColor ' + this.color + ', '
+    }
+    sayColor()
+    o.sayColor = sayColor
+    o.sayColor()
+
+    function outer() {
+      inner()
+    }
+    function inner() {
+      console.log('caller', arguments.callee.caller);
+    }
+    outer()
+  </script>
+</body>
+</html>
