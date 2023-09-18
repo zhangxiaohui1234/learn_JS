@@ -1,270 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>function</title>
+    <link rel="stylesheet" href="./index.css" />
+    <style>
+      .closure {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: left;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>function</title>
-  <link rel="stylesheet" href="./index.css" />
-  <style>
-    .closure {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: left;
-    }
+      .closure-explain {
+        flex: 1;
+      }
+    </style>
+  </head>
 
-    .closure-explain {
-      flex: 1;
-    }
-  </style>
-</head>
-
-<body>
-  <p>
-    function类型实际上也是一个对象。函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。因此，也就没有了函数重载
-  </p>
-  <p>要访问函数的指针而不执行函数的话，必须去掉函数名后面的大括号</p>
-  <p>在函数内部，有两个特殊的对象：arguments和this</p>
-  <p>
-    函数的参数可以通过arguments获取到，arguments对象与数组类似，但不是array的实例。传递的所有参数都可以通过数组下标的方式获取到
-  </p>
-  <p id="p1"></p>
-  <p>
-    虽然arguments的主要用途是保存函数参数，但这个对象还有一个名叫callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数，关于这个有一个非常经典的阶乘函数
-  </p>
-  <p>
-    递归一般都是函数调用自身，在函数有名字，且以后名字都不会变的情况下，定义没有问题。但问题是，递归就和函数名耦合在了一起。为了消除这种现象，可以是用arguments.callee
-  </p>
-  <p>使用了callee之后，不管函数名改成了什么，都可以完成函数内部的递归。</p>
-  <p>
-    另一个特殊变量this，this引用的是函数执行的环境对象。由于调用函数之前，this的指向并不确定。因此，有可能会在代码执行的过程中指向不同的对象。
-  </p>
-  <p id="p2"></p>
-  <p>
-    还有一个属性，caller，用于保存调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，caller值为null
-  </p>
-  <p>
-    每个函数都包含两个属性：length和prototype，length表示函数希望接收的参数的个数；对于SE的引用类型而言，prototype是保存它们所有实例方法的真正所在，
-  </p>
-  <p>
-    每个函数都包含两个方法：apply()和call()，这两个方法的用途都是在特定的作用域中调用函数，实际上等同于设置函数体this对象的值。都接收两个值，第一个是作用域，第二个是参数，区别在于apply的参数是数组，apply(this,
-    []);而call的参数必须逐个列出，call(this, param1, param2, param3, ...)
-  </p>
-  <section>
-    <h2>闭包</h2>
-    <div class="closure">
-      <div class="closure-explain">
-        <h4>特性：</h4>
-        <ol>
-          <li>函数嵌套函数</li>
-          <li>内层函数可以访问外层函数的变量和参数</li>
-        </ol>
+  <body>
+    <p>function类型实际上也是一个对象。函数名实际上也是一个指向函数对象的指针，不会与某个函数绑定。因此，也就没有了函数重载</p>
+    <p>要访问函数的指针而不执行函数的话，必须去掉函数名后面的大括号</p>
+    <p>在函数内部，有两个特殊的对象：arguments和this</p>
+    <p>函数的参数可以通过arguments获取到，arguments对象与数组类似，但不是array的实例。传递的所有参数都可以通过数组下标的方式获取到</p>
+    <p id="p1"></p>
+    <p>虽然arguments的主要用途是保存函数参数，但这个对象还有一个名叫callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数，关于这个有一个非常经典的阶乘函数</p>
+    <p>递归一般都是函数调用自身，在函数有名字，且以后名字都不会变的情况下，定义没有问题。但问题是，递归就和函数名耦合在了一起。为了消除这种现象，可以是用arguments.callee</p>
+    <p>使用了callee之后，不管函数名改成了什么，都可以完成函数内部的递归。</p>
+    <p>另一个特殊变量this，this引用的是函数执行的环境对象。由于调用函数之前，this的指向并不确定。因此，有可能会在代码执行的过程中指向不同的对象。</p>
+    <p id="p2"></p>
+    <p>还有一个属性，caller，用于保存调用当前函数的函数的引用，如果是在全局作用域中调用当前函数，caller值为null</p>
+    <p>每个函数都包含两个属性：length和prototype，length表示函数希望接收的参数的个数；对于SE的引用类型而言，prototype是保存它们所有实例方法的真正所在，</p>
+    <p>每个函数都包含两个方法：apply()和call()，这两个方法的用途都是在特定的作用域中调用函数，实际上等同于设置函数体this对象的值。都接收两个值，第一个是作用域，第二个是参数，区别在于apply的参数是数组，apply(this, []);而call的参数必须逐个列出，call(this, param1, param2, param3, ...)</p>
+    <section>
+      <h2>闭包</h2>
+      <div class="closure">
+        <div class="closure-explain">
+          <h4>特性：</h4>
+          <ol>
+            <li>函数嵌套函数</li>
+            <li>内层函数可以访问外层函数的变量和参数</li>
+          </ol>
+        </div>
+        <div class="closure-explain">
+          <h4>作用：</h4>
+          <ol>
+            <li>防止变量和参数被垃圾回收机制回收（变量持久化）</li>
+            <li>防止变量和参数被外部污染（变量和参数只在闭包内部被调用）</li>
+          </ol>
+        </div>
+        <div class="closure-explain">
+          <h4>风险：</h4>
+          <ol>
+            <li>滥用会造成内存溢出</li>
+          </ol>
+        </div>
       </div>
-      <div class="closure-explain">
-        <h4>作用：</h4>
-        <ol>
-          <li>防止变量和参数被垃圾回收机制回收（变量持久化）</li>
-          <li>防止变量和参数被外部污染（变量和参数只在闭包内部被调用）</li>
-        </ol>
-      </div>
-      <div class="closure-explain">
-        <h4>风险：</h4>
-        <ol>
-          <li>滥用会造成内存溢出</li>
-        </ol>
-      </div>
-    </div>
-    <p>
-      闭包有些类似java中类的封装，闭包内部的变量是类的私有属性，只有闭包内部的函数可以操作内部的变量。下面是一些实用例子
-    </p>
-    <p>
-      基础用法：数字累加<button onclick="counter()">点击+1</button>，计算结果：<span id="counter-result">0</span>
-    </p>
-    <p>
-      实现模块化：闭包内返回多个方法，将功能模块化拆分，想要操作闭包内的变量只有通过这些方法。
-      <button onclick="moduleCounter.increment();moduleCounter.getCount()">
-        点击+1</button>，
-      <button onclick="moduleCounter.reset();moduleCounter.getCount()">
-        清零</button>， 计算结果：<span id="moduleCounter-result">0</span>
-    </p>
-    <p>
-      实现缓存函数：减少重复函数的调用，<button onclick="memorizedCalculation(5)">
-        5的阶乘</button>第一次调用会在控制台打印提示，有了缓存之后的调用就不会有打印提示，计算结果：<span id="memorizedCalculation-result">0</span>
-    </p>
-    <p>
-      封装私有变量：封装出一个类，例子封装了一个person的类，有name和age两个私有属性，只有类提供的方法才能修改这两个私有属性
-    </p>
-    <p>
-      实现函数柯里化：只传递给函数一部分参数来调用它，让它返回一个新函数去处理剩下的参数。
-    </p>
-    <p>
-      实现防抖与节流
-    </p>
-  </section>
-  <section>
-    <h2>防抖与节流</h2>
-    <p>
-      防抖：操作时不执行，一段时间不操作后确定执行，中途有操作则重新计算时间。与时间有关，每次操作都要重置定时器
-      <input id="debounce-input" type="text" oninput="inputChange()">
-      <span></span>
-    </p>
-    <p>
-      节流：一段时间内不管操作几次，都只执行一次。与时间有关，记录第一次操作的时间为起始时间，一段时间之后再确定执行
-      <button onclick="btnClick()">节流</button>
-      <span id="throttle-button"></span>
-    </p>
-  </section>
-  <script type="text/javascript">
-    const p1 = document.getElementById("p1");
-    function example(param1, param2) {
-      for (let i = 0; i < arguments.length; i++) {
-        p1.innerText += arguments[i] + ", ";
+      <p>闭包在使用过后，删除对函数的引用，就可以释放内存空间。比如把原本指向闭包函数的变量名，重新赋值为null即可释放闭包内存。闭包有些类似java中类的封装，闭包内部的变量是类的私有属性，只有闭包内部的函数可以操作内部的变量。下面是一些实用例子</p>
+      <p>基础用法：数字累加<button onclick="counter()">点击+1</button>，计算结果：<span id="counter-result">0</span></p>
+      <p>
+        实现模块化：闭包内返回多个方法，将功能模块化拆分，想要操作闭包内的变量只有通过这些方法。
+        <button onclick="moduleCounter.increment();moduleCounter.getCount()">点击+1</button>， <button onclick="moduleCounter.reset();moduleCounter.getCount()">清零</button>， 计算结果：<span id="moduleCounter-result">0</span>
+      </p>
+      <p>
+        实现缓存函数：减少重复函数的调用，
+        <input id="memorizedCalculation-input" type="text" />
+        <button onclick="memorizedCalculation()">计算阶乘</button>第一次调用会在控制台打印提示，有了缓存之后的调用就不会有打印提示，计算结果：
+        <span id="memorizedCalculation-result">0</span>
+      </p>
+      <p>封装私有变量：封装出一个类，例子封装了一个person的类，有name和age两个私有属性，只有类提供的方法才能修改这两个私有属性</p>
+      <p>实现函数柯里化：只传递给函数一部分参数来调用它，让它返回一个新函数去处理剩下的参数。</p>
+      <p>实现防抖与节流</p>
+    </section>
+    <section>
+      <h2>防抖与节流</h2>
+      <p>
+        防抖：操作时不执行，一段时间不操作后确定执行，中途有操作则重新计算时间。与时间有关，每次操作都要重置定时器
+        <input id="debounce-input" type="text" oninput="inputChange()" />
+        <span></span>
+      </p>
+      <p>
+        节流：一段时间内不管操作几次，都只执行一次。与时间有关，记录第一次操作的时间为起始时间，一段时间之后再确定执行
+        <button onclick="btnClick()">节流</button>
+        <span id="throttle-button"></span>
+      </p>
+    </section>
+    <script type="text/javascript">
+      const p1 = document.getElementById('p1')
+      function example(param1, param2) {
+        for (let i = 0; i < arguments.length; i++) {
+          p1.innerText += arguments[i] + ', '
+        }
       }
-    }
-    example("first", "second", "third", "fourth", "fifth", "sixth");
+      example('first', 'second', 'third', 'fourth', 'fifth', 'sixth')
 
-    function factorial(num) {
-      console.log("正在计算 " + num + "的阶乘");
-      if (num <= 1) {
-        return 1;
-      } else {
-        // 函数内部的递归调用
-        return num * arguments.callee(num - 1);
-      }
-    }
-
-    window.color = "red";
-    var o = { color: "blue" };
-    function sayColor() {
-      console.log("this", this);
-      document.getElementById("p2").innerText +=
-        "sayColor " + this.color + ", ";
-    }
-    sayColor();
-    o.sayColor = sayColor;
-    o.sayColor();
-
-    function outer() {
-      inner();
-    }
-    function inner() {
-      console.log("caller", arguments.callee.caller);
-    }
-    outer();
-    // 闭包基础用法
-    function makeCounter() {
-      let count = 0;
-      return function () {
-        count++;
-        document.getElementById("counter-result").innerText = count;
-      };
-    }
-    const counter = makeCounter();
-    // 实现模块化
-    const moduleCounter = (function () {
-      let count = 0;
-      function increment() {
-        count++;
-      }
-      function reset() {
-        count = 0;
-      }
-      function getCount() {
-        document.getElementById("moduleCounter-result").innerHTML = count;
-      }
-      return {
-        increment,
-        reset,
-        getCount,
-      };
-    })();
-    // 实现缓存函数
-    function memorize(fn) {
-      const cache = {};
-      return function (arg) {
-        if (arg in cache) {
-          return cache[arg];
+      function factorial(num) {
+        console.log('正在计算 ' + num + '的阶乘')
+        if (num <= 1) {
+          return 1
         } else {
-          const result = fn(arg);
-          cache[arg] = result;
-          return result;
-        }
-      };
-    }
-    const fun1 = memorize(factorial)
-    const memorizedCalculation = function (num) {
-      document.getElementById("memorizedCalculation-result").innerHTML = fun1(num);
-    };
-    // 定义了一个person类，封装私有变量
-    function createPerson(name, age) {
-      let privateName = name || ''
-      let privateAge = age || 0
-      function setName(newName) {
-        privateName = newName
-      }
-      function getName() {
-        return privateName
-      }
-      function setAge(newAge) {
-        privateAge = newAge
-      }
-      function getAge() {
-        return privateAge
-      }
-      return {
-        setName,
-        getName,
-        setAge,
-        getAge
-      }
-    }
-    const person = createPerson('张三', 18)
-    console.log('name:', person.getName(), 'age:', person.getAge())
-    person.setName('李四')
-    person.setAge(28)
-    console.log('name:', person.getName(), 'age:', person.getAge())
-    // 防抖
-    function debounce(fun, delay) {
-      let timer = null
-      return function () {
-        let context = this
-        let args = arguments
-        if (timer) {
-          clearTimeout(timer)
-          timer = null
-        }
-        timer = setTimeout(function () {
-          fun.apply(context, args)
-        }, delay)
-      }
-    }
-    // 节流
-    function throttle(fun, time) {
-      let startTime = new Date().getTime()
-      return function () {
-        let context = this
-        let args = arguments
-        let endTime = new Date().getTime()
-        if (endTime - startTime >= time) {
-          startTime = endTime
-          fun.apply(context, args)
+          // 函数内部的递归调用
+          return num * arguments.callee(num - 1)
         }
       }
-    }
-    function handleInput() {
-      const value = document.getElementById('debounce-input').value
-      document.querySelector('#debounce-input + span').innerText = '输入的value：' + value
-    }
-    const inputChange = debounce(handleInput, 2000)
-    function handleClick() {
-      let time = 0
-      return function () {
-        time += 1
-        document.getElementById('throttle-button').innerText = '执行了' + time + '次'
-      }
-    }
-    const btnClick = throttle(handleClick(), 2000)
-  </script>
-</body>
 
+      window.color = 'red'
+      var o = { color: 'blue' }
+      function sayColor() {
+        console.log('this', this)
+        document.getElementById('p2').innerText += 'sayColor ' + this.color + ', '
+      }
+      sayColor()
+      o.sayColor = sayColor
+      o.sayColor()
+
+      function outer() {
+        inner()
+      }
+      function inner() {
+        console.log('caller', arguments.callee.caller)
+      }
+      outer()
+      // 闭包基础用法
+      function makeCounter() {
+        let count = 0
+        return function () {
+          count++
+          document.getElementById('counter-result').innerText = count
+        }
+      }
+      const counter = makeCounter()
+      // 实现模块化
+      const moduleCounter = (function () {
+        let count = 0
+        function increment() {
+          count++
+        }
+        function reset() {
+          count = 0
+        }
+        function getCount() {
+          document.getElementById('moduleCounter-result').innerHTML = count
+        }
+        return {
+          increment,
+          reset,
+          getCount,
+        }
+      })()
+      // 实现缓存函数
+      function memorize(fn) {
+        const cache = {}
+        return function (arg) {
+          if (arg in cache) {
+            return cache[arg]
+          } else {
+            const result = fn(arg)
+            cache[arg] = result
+            return result
+          }
+        }
+      }
+      const fun1 = memorize(factorial)
+      const memorizedCalculation = function () {
+        const num = document.getElementById('memorizedCalculation-input').value
+        document.getElementById('memorizedCalculation-result').innerHTML = fun1(num)
+      }
+      // 定义了一个person类，封装私有变量
+      function createPerson(name, age) {
+        let privateName = name || ''
+        let privateAge = age || 0
+        function setName(newName) {
+          privateName = newName
+        }
+        function getName() {
+          return privateName
+        }
+        function setAge(newAge) {
+          privateAge = newAge
+        }
+        function getAge() {
+          return privateAge
+        }
+        return {
+          setName,
+          getName,
+          setAge,
+          getAge,
+        }
+      }
+      const person = createPerson('张三', 18)
+      console.log('name:', person.getName(), 'age:', person.getAge())
+      person.setName('李四')
+      person.setAge(28)
+      console.log('name:', person.getName(), 'age:', person.getAge())
+      // 防抖
+      function debounce(fun, delay) {
+        let timer = null
+        return function () {
+          let context = this
+          let args = arguments
+          if (timer) {
+            clearTimeout(timer)
+            timer = null
+          }
+          timer = setTimeout(function () {
+            fun.apply(context, args)
+          }, delay)
+        }
+      }
+      // 节流
+      function throttle(fun, time) {
+        let startTime = new Date().getTime()
+        return function () {
+          let context = this
+          let args = arguments
+          let endTime = new Date().getTime()
+          if (endTime - startTime >= time) {
+            startTime = endTime
+            fun.apply(context, args)
+          }
+        }
+      }
+      function handleInput() {
+        const value = document.getElementById('debounce-input').value
+        document.querySelector('#debounce-input + span').innerText = '输入的value：' + value
+      }
+      const inputChange = debounce(handleInput, 2000)
+      function handleClick() {
+        let time = 0
+        return function () {
+          time += 1
+          document.getElementById('throttle-button').innerText = '执行了' + time + '次'
+        }
+      }
+      const btnClick = throttle(handleClick(), 2000)
+      // js申明变量时会出现变量提升，声明式函数整体提升。在编译过程中，提升的顺序是参数 > 函数 > 变量
+      // 下面的代码将会输出b函数，而不是20。因为声明提升函数在前变量在后，且这里是函数立即执行，因此此时的b是函数
+      // 如果b函数增加一个参数b，那么输出的是20，此时的b并不是上面声明的b，而是新的参数b
+      // 如下代码，b最终的结果永远是10，因为变量在后，覆盖了在前面赋值的函数，函数内的执行结果，也会被后面的变量赋值给覆盖
+      var b = 10
+      ;(function b() {
+        b = 20
+        console.log(b)
+      })()
+    </script>
+  </body>
 </html>
